@@ -1,11 +1,10 @@
-
 /*
   Simple Waveform generator with Arduino Due
 
  */
-
-#include "waveform.h"
+ 
 #include <Audio.h>
+#include "waveform.h"
 
 #define HzSample 1000000/(maxSamplesNum*75)  // sample for the 75Hz signal expressed in microseconds 
 
