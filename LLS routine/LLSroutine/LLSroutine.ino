@@ -6,10 +6,8 @@
 
 #include "waveform.h"
 
-
-
-#define encoder0PinA 22
-#define encoder0PinB 24
+#define encoder0PinA 24
+#define encoder0PinB 22
 
 volatile int wave0 = 0;
 
@@ -92,7 +90,7 @@ void changeDCoffsetup(){
   else if(~A & ~B & (DCoffset < +1024 )){
     DCoffset++;
   }
-  Serial.print(DCoffset);
+  Serial.println(DCoffset);
 }
   
 void signalgen(){
@@ -100,7 +98,7 @@ void signalgen(){
   p_dsignal[j] = read_photodioderef()-read_photodiodeprobe();
   error = signal_analysis(p_dsignal, i, j); 
   //lasercontrol(error);
-  analogWrite(DAC1, waveformsTable[i]);  // write the selected waveform on DAC1
+  analogWrite(DAC1, waveformsTable[i]+DCoffset);  // write the selected waveform on DAC1
   
   j++;
   if(j == 1)  // for derrivative calculations
